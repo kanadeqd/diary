@@ -18,13 +18,15 @@ Top: **Limit** num
 
 选择前三个 跳过第一个
 
+ ```mysql
 Select * from table
 
-**Limit** 1, 3 
+Limit 1, 3 
 
-**Limit** 3, **offset** 1
+Limit 3, offset 1
+ ```
 
- 
+
 
 
 
@@ -48,27 +50,84 @@ Full join: 左右都会出现空
 
 
 
-**Select if null** (
+## 如果查询值可为空
 
-​    (Select * from table),
+```mysql
+Select ifnull (
 
-​    Null
+    (Select * from table),
 
+    Null
 )
-
- 
-
-**If** (condition, true value, false value)
-
- 
-
-**Case when** condition **then** value1 
-
-**When** condition **then** value2 
-
-​    …   
-
-**When** condition **then** value3 **end**
+```
 
 
 
+## if函数
+
+ ```mysql
+If (condition, true , false )
+ ```
+
+
+
+## case when函数
+
+```mysql
+Case when condition then value1 
+
+When condition then value2 
+   …   
+   
+When condition then value3 end
+```
+
+
+
+
+
+## 排序
+
+### row_number
+
+在排名时序号连续不重复
+
+```mysql
+select row_number() OVER (order by salary desc) from table
+```
+
+![在这里插入图片描述](assets/20190509113254288.png)
+
+### rank
+
+排序重复时不会连续，相同的一样
+
+```mysql
+select rank() over(order by salary desc) from table
+```
+
+![在这里插入图片描述](assets/20190509121220509.png)
+
+### dense_rank
+
+排序是连续的，相同的一样
+
+```mysql
+select dense_rank() over(order by salary desc) from table 
+```
+
+
+
+![在这里插入图片描述](assets/20190509121514351.png)
+
+### NTILE
+
+NTILE(N) 会分成N组
+
+```mysql
+select NTILE(2) over(order by salary desc) from table 
+```
+
+
+
+![在这里插入图片描述](assets/20190509123016835.png)
