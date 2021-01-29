@@ -52,10 +52,12 @@ Full join: 左右都会出现空
 
 ## 如果查询值可为空
 
+ifnull 只能接收一个值
+
 ```mysql
 Select ifnull (
 
-    (Select * from table),
+    (Select one_value from table),
 
     Null
 )
