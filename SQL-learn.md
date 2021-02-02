@@ -4,17 +4,25 @@
 
 
 
-Insert, update, delete 比较特殊，需要单独记忆:
+## Insert, update, delete 
 
-\1.    **Insert into** TableName (s1, s2, s3…) **Values** (v1, v2, v3 …)
+比较特殊，需要单独记忆:
 
-\2.    **Update** TableName **set** ColumnName = “v1” **where** ColumnName = “v2”
+ ```mysql
+insert into TabelName (s1,s2,s3) Values (v1,v2,v3)
+ ```
 
-\3.    **Delete** **from** TableName **where** ColumnName = “v1”
+```mysql
+Update TabelName set ColumnName = 'v1' where columnName = 'v2'
+```
 
- 
+```mysql
+delete from TableName where ColumnName = 'v1'
+```
 
-Top: **Limit** num 
+
+
+## Top排序: Limit
 
 选择前三个 跳过第一个
 
@@ -28,11 +36,34 @@ Limit 3, offset 1
 
 
 
+## 判断字段是否为空：IS NULL
+
+```mysql
+select * from TableName where Address is null  
+```
+
+```mysql
+select * from TableName where Address is not null
+```
 
 
-#  JOIN相关
+
+## 分组：Gourp By , Having
+
+Group by 分组
+
+where无法与Group by连用 引用having
+
+```mysql
+select sum(value1) from TableName 
+where value3 > 3000 
+Group By Id 
+Having sum(value2) < 2000
+```
 
 
+
+##  JOIN
 
 Left/right join：以左表为基准开始join，右边会出现空
 
@@ -43,6 +74,42 @@ Inner join：无空
 Full join: 左右都会出现空
 
  
+
+## 日期算法
+
+```mysql
+select datediff(endDate, firstDate)
+```
+
+<img src="assets/image-20210202112954693.png" alt="image-20210202112954693" style="zoom:67%;" />
+
+
+
+## 取整，整除
+
+num为小数位
+
+```mysql
+round(values,num)
+```
+
+num为除数
+
+```mysql
+mod(values,num)
+```
+
+
+
+## 创建新窗口：with as 
+
+```mysql
+with temp as(select * from table )
+```
+
+
+
+
 
 
 
@@ -69,6 +136,7 @@ Select ifnull (
 
  ```mysql
 If (condition, true , false )
+i.e. SELECT IF(500<1000, 5, 10)
  ```
 
 
@@ -86,9 +154,19 @@ When condition then value3 end
 
 
 
-
-
 ## 排序
+
+### partition by
+
+分组函数
+
+```mysql
+select *, ROW_NUMBER() over(partition by Name order by Score) from table
+```
+
+![image-20210202104515647](assets/image-20210202104515647.png)
+
+
 
 ### row_number
 
