@@ -11,3 +11,10 @@
 
 今天开始算法学习了嗷
 
+看了简单的bubble, select 和 insert 排序
+
+merge排序居然懵了 看来我真的是把他看扁了
+
+![img](D:\diary\README.assets\1622645212(1)-1622645238359.jpg)
+
+明天再看吧 累了 毁灭吧
