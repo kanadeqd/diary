@@ -1,12 +1,40 @@
-def getMax(List, f, e):
+def merge(List):
+    sortProcess(List, 0, len(List) - 1)
+
+def sortProcess(l, f, e):
     if f == e:
-        return List[f]
-
+        return
     mid = int((f + e) / 2)
-    left = getMax(List, f, mid)
-    right = getMax(List, mid + 1, e)
+    sortProcess(l, f, mid)
+    sortProcess(l, mid + 1, e)
+    mergeProcess(l, f, mid, e)
 
-    return max(left, right)
+def mergeProcess(l, f, mid, e):
+    L = l[f: mid + 1]
+    R = l[mid + 1: e + 1]
+    i = 0
+    j = 0
+    k = f
+    while i < len(L) and j < len(R):
+        if L[i] <= R[j]:
+            l[k] = L[i]
+            i += 1
+        else:
+            l[k] = R[j]
+            j += 1
+        k += 1
+    while i < len(L):
+        l[k] = L[i]
+        i += 1
+        k += 1
+    while j < len(R):
+        l[k] = R[j]
+        j += 1
+        k += 1
 
-x = [1,2,3,4,5,6,7]
-getMax(x,0,len(x)-1)
+import numpy as np
+
+i = np.random.randint(low = -100, high = 100, size = 4).tolist()
+i = [1,1,3,5,2,5,6]
+merge(i)
+print(i)
